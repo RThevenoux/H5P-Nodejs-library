@@ -215,12 +215,13 @@ export default class H5PAjaxExpressController {
                         400
                     );
                 }
+                let file : any = {data : req.files[0].buffer, mimetype : req.files[0].mimetype, name: req.files[0].originalname, size: req.files[0].size}
                 const uploadFileResponse = await this.h5pEditor.saveContentFile(
                     req.body.contentId === '0'
                         ? req.query.contentId
                         : req.body.contentId,
                     field,
-                    req.files.file,
+                    file,
                     req.user
                 );
                 res.status(200).json(uploadFileResponse);
